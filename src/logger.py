@@ -1,17 +1,17 @@
-import logging
-import os
-from datetime import datetime
+import logging         #to write log messages
+import os                           #to handle file paths and directories
+from datetime import datetime         #to get the current date and time for log file naming
 
 # Generate log file name with timestamp
 LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
 
-# Path to logs directory
+# Path to logs directory, eg-C:\Users\Asfi\project
 logs_dir = os.path.join(os.getcwd(), "logs")
 
-# Create logs directory if it doesn't exist
+# Create logs directory if it doesn't exist,A folder named logs is inside your project folder
 os.makedirs(logs_dir, exist_ok=True)
 
-# Full path to the log file
+# Full path to the log file,  eg- "C:\Users\Asfi\project\logs\02_14_2026_18_35_20.log"
 log_file_path = os.path.join(logs_dir, LOG_FILE)
 
 logging.basicConfig(
