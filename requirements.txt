@@ -5,4 +5,5 @@ matplotlib
 scikit-learn
 catboost
 xgboost
+dill
 #-e .    # it connects the current directory to the package, it will look for setup.py file and it will install the package in the current directory. It is used when we are developing a package and we want to test it without installing it globally. It will create a symbolic link to the package in the current directory, so any changes made to the package will be reflected immediately without needing to reinstall it.
