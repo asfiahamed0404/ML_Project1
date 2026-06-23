@@ -9,6 +9,8 @@ from dataclasses import dataclass  #cleaner way to define a small “config” c
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
 
+from src.components.model_trainer import ModelTrainer
+
 @dataclass  # if you only store variables #It automatically creates the __init__ and makes the code clean and readable
 class DataIngestionConfig:
   train_data_path: str = os.path.join('artifacts', 'train.csv')
@@ -50,4 +52,8 @@ if __name__ == '__main__':
   train_data, test_data = obj.initiate_data_ingestion()
 
   data_transformation = DataTransformation()
-  data_transformation.initiate_data_transformation(train_data, test_data)
+  train_array,test_array,_ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+  model_trainer = ModelTrainer()
+  r2_square = model_trainer.initiate_model_trainer(train_array, test_array)
+  print(r2_square)
