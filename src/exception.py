@@ -1,7 +1,7 @@
 import sys       #gives access to Python system info (especially exception info)
 from src.logger import logging
 
-def error_message_detail(error, error_detail: sys):
+def error_message_detail(error, error_detail: sys):  #search for custom exception handling
     _, _, exc_tb = error_detail.exc_info()    
     #(type, value, traceback)
     #exc_tb - which file exception happend ,which line
@@ -16,7 +16,7 @@ class CustomException(Exception):
     #constructor
     #It runs automatically when you create an object
     def __init__(self, error_message, error_detail: sys): 
-        super().__init__(error_message)        #inheriting parent exception
+        super().__init__(error_message)        #inheriting parent exception, Exception.__init__(self, error_message)
         self.error_message = error_message_detail(error_message, error_detail=error_detail)
 
     def __str__(self):   #converting an object to a string #print err msg

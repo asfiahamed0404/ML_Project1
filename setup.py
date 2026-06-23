@@ -25,6 +25,7 @@ setup(
     author="Asfi",
     author_email="muasfiahamed276@gmail.com",
     packages=find_packages(),   #it will directly go to all directory and see where __init__.py file is there and it will consider that as package and it will include that in the distribution package
+    #install_requires=["numpy","pandas","scikit-learn"]  #it will automatically install these packages when we install our package
     install_requires=get_requirements('requirements.txt')
 
 )

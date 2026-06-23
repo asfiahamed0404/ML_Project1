@@ -25,7 +25,8 @@ class DataTransformation:
   def get_data_transformer_object(self):
     try:
       """
-      This function is responsible for data transformation"""
+      This function is responsible for data transformation
+      """
 
       numerical_columns = ['writing_score', 'reading_score']
       categorical_columns = ['gender', 'race_ethnicity', 'parental_level_of_education', 'lunch', 'test_preparation_course']

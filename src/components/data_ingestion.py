@@ -9,7 +9,7 @@ from dataclasses import dataclass  #cleaner way to define a small “config” c
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
 
-@dataclass  # if yo uonly store varivale #It automatically creates the __init__ and makes the code clean and readable
+@dataclass  # if you only store variables #It automatically creates the __init__ and makes the code clean and readable
 class DataIngestionConfig:
   train_data_path: str = os.path.join('artifacts', 'train.csv')
   test_data_path: str = os.path.join('artifacts', 'test.csv')
