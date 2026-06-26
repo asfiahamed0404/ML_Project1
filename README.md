@@ -70,8 +70,8 @@
 ## 📸 Demo
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/placeholder/landing.png" alt="Landing Page" width="48%">
-  <img src="https://user-images.githubusercontent.com/placeholder/predict.png" alt="Predict Page" width="48%">
+  <img src="assets/landing.png" alt="Landing Page" width="48%">
+  <img src="assets/predict.png" alt="Predict Page" width="48%">
 </p>
 
 <p align="center">
