@@ -1,3 +1,4 @@
+import os
 import sys
 from dataclasses import dataclass
 
@@ -10,13 +11,16 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from src.exception import CustomException
 from src.logger import logging
-import os
 
 from src.utils import save_object
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
+
+
 @dataclass
 class DataTransformationConfig:
-  preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
+    preprocessor_obj_file_path: str = os.path.join(ARTIFACTS_DIR, "preprocessor.pkl")
 
 class DataTransformation:
   def __init__(self):

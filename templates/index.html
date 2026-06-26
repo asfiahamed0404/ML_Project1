@@ -1,13 +1,148 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HOME PAGE</title>
+  <title>ML Project — Student Performance Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding: 3.5rem;
+    }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 2rem; } }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      margin: 0.6rem 0 1rem;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff, #c7d2fe 60%, #fbcfe8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p.lead { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 56ch; }
+    .hero .cta { margin-top: 1.6rem; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .stats { display: flex; gap: 1.2rem; margin-top: 2rem; flex-wrap: wrap; }
+    .stat { padding: 0.9rem 1.1rem; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+    .stat .num { font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #34d399, #06b6d4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .stat .lbl { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    .visual {
+      position: relative;
+      padding: 2rem;
+      display: grid;
+      place-items: center;
+    }
+    .visual .orb {
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, #6366f1, #ec4899, #06b6d4, #10b981, #f59e0b, #6366f1);
+      filter: blur(2px);
+      animation: spin 12s linear infinite;
+      box-shadow: 0 30px 60px rgba(99,102,241,0.35);
+    }
+    .visual .core {
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(15, 12, 41, 0.85);
+      border: 1px solid rgba(255,255,255,0.18);
+      display: grid; place-items: center;
+      text-align: center;
+      padding: 1rem;
+    }
+    .visual .core h2 { margin: 0; font-size: 1.4rem; }
+    .visual .core p { margin: 0.4rem 0 0; color: var(--text-muted); font-size: 0.85rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    section.features { margin-top: 3rem; }
+    section.features h2 { text-align: center; font-size: 1.6rem; margin-bottom: 1.4rem; }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My Flask App</h1>
-  
+  <div class="container">
+    <nav style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6366f1,#ec4899);display:grid;place-items:center;font-weight:800;">M</span>
+        <strong style="letter-spacing:0.4px;">ML Project</strong>
+      </div>
+      <div style="display:flex;gap:0.6rem;">
+        <a class="btn btn-ghost" href="{{ url_for('predict_datapoint') }}">Predict</a>
+        <a class="btn btn-primary" href="{{ url_for('predict_datapoint') }}">Get Started</a>
+      </div>
+    </nav>
+
+    <header class="hero glass">
+      <div>
+        <span class="badge fade-up">End-to-End ML • Flask • Scikit-learn</span>
+        <h1 class="fade-up delay-1">Predict Student Math Scores with Confidence</h1>
+        <p class="lead fade-up delay-2">
+          An end-to-end machine learning project that ingests the Student Performance dataset,
+          trains multiple regression models with hyperparameter tuning, and serves the best one
+          through a clean, responsive web UI.
+        </p>
+        <div class="cta fade-up delay-3">
+          <a class="btn btn-primary" href="{{ url_for('predict_datapoint') }}">Try the Predictor →</a>
+          <a class="btn btn-ghost" href="/health">API Health</a>
+        </div>
+        <div class="stats fade-up delay-4">
+          <div class="stat"><div class="num">8+</div><div class="lbl">Models Tuned</div></div>
+          <div class="stat"><div class="num">7</div><div class="lbl">Input Features</div></div>
+          <div class="stat"><div class="num">3-Stage</div><div class="lbl">Pipeline</div></div>
+        </div>
+      </div>
+
+      <div class="visual fade-up delay-2">
+        <div class="orb" aria-hidden="true"></div>
+        <div class="core">
+          <div>
+            <h2>Math Score</h2>
+            <p>Regression model trained on student demographics & scores.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="features">
+      <h2>What's Inside</h2>
+      <div class="grid grid-3">
+        <div class="feature fade-up">
+          <div class="icon">📥</div>
+          <h3>Data Ingestion</h3>
+          <p>Loads <code>stud.csv</code>, persists raw/train/test splits into the <code>artifacts/</code> folder.</p>
+        </div>
+        <div class="feature fade-up delay-1">
+          <div class="icon">🛠️</div>
+          <h3>Data Transformation</h3>
+          <p>Numerical scaling + categorical one-hot encoding via a reusable Scikit-learn <code>ColumnTransformer</code>.</p>
+        </div>
+        <div class="feature fade-up delay-2">
+          <div class="icon">🧠</div>
+          <h3>Model Training</h3>
+          <p>Compares 8 regressors with <code>GridSearchCV</code> and persists the best one as <code>model.pkl</code>.</p>
+        </div>
+        <div class="feature fade-up delay-1">
+          <div class="icon">🌐</div>
+          <h3>Flask Web App</h3>
+          <p>A responsive UI with input validation, animated result card, score meter & confetti.</p>
+        </div>
+        <div class="feature fade-up delay-2">
+          <div class="icon">📦</div>
+          <h3>Custom Logging & Errors</h3>
+          <p>Timestamped logs to file + console, plus a custom exception class with file & line info.</p>
+        </div>
+        <div class="feature fade-up delay-3">
+          <div class="icon">🚀</div>
+          <h3>One-Click Training</h3>
+          <p>Hit <code>/train</code> to retrain the pipeline end-to-end and refresh the served model.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">Crafted with ❤ for learning • Flask • scikit-learn • catboost • xgboost</p>
+  </div>
 </body>
 </html>

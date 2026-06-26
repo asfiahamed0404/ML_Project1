@@ -8,14 +8,18 @@ from sklearn.model_selection import train_test_split as tts
 from dataclasses import dataclass  #cleaner way to define a small “config” class with defaults
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
-
 from src.components.model_trainer import ModelTrainer
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
+DATA_FILE_PATH = os.path.join(BASE_DIR, "notebook", "data", "stud.csv")
+
 
 @dataclass  # if you only store variables #It automatically creates the __init__ and makes the code clean and readable
 class DataIngestionConfig:
-  train_data_path: str = os.path.join('artifacts', 'train.csv')
-  test_data_path: str = os.path.join('artifacts', 'test.csv')
-  raw_data_path: str = os.path.join('artifacts', 'data.csv')
+    train_data_path: str = os.path.join(ARTIFACTS_DIR, "train.csv")
+    test_data_path: str = os.path.join(ARTIFACTS_DIR, "test.csv")
+    raw_data_path: str = os.path.join(ARTIFACTS_DIR, "data.csv")
 
 class DataIngestion:  
   def __init__(self):  #Constructor
@@ -24,7 +28,7 @@ class DataIngestion:
   def initiate_data_ingestion(self):
     logging.info('Entered the data ingestion method')
     try:
-      df = pd.read_csv('notebook/data/stud.csv')
+      df = pd.read_csv(DATA_FILE_PATH)
       logging.info('Read the dataset as dataframe')
 
       os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)

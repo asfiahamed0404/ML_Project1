@@ -18,9 +18,13 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object,evaluate_models
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
+
+
 @dataclass
 class ModelTrainerConfig:
-    trained_model_file_path = os.path.join("artifacts", "model.pkl")
+    trained_model_file_path: str = os.path.join(ARTIFACTS_DIR, "model.pkl")
 
 class ModelTrainer:
     def __init__(self):
@@ -89,10 +93,11 @@ class ModelTrainer:
             }
 
 
-            #model_report: dict = evaluate_models(X_train, y_train, X_test, y_test, models)
-            model_report: dict = evaluate_models(X_train, y_train, X_test, y_test, models,param=params)
+            model_report: dict = evaluate_models(
+                X_train, y_train, X_test, y_test, models, param=params
+            )
 
-            best_model_score = max(sorted(model_report.values()))
+            best_model_score = max(model_report.values())
 
             best_model_name = list(model_report.keys())[
                 list(model_report.values()).index(best_model_score)
