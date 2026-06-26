@@ -74,7 +74,9 @@
   <img src="https://user-images.githubusercontent.com/placeholder/predict.png" alt="Predict Page" width="48%">
 </p>
 
-<p align="center"><em>🎬 Replace these with real screenshots / GIF once you run the app locally!</em></p>
+<p align="center">
+  <img src="assets/demo.gif" width="800">
+</p>
 
 ---
 
